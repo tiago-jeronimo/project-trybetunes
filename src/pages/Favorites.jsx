@@ -5,8 +5,8 @@ class Favorites extends React.Component {
   render() {
     return (
       <div data-testid="page-favorites">
-        <p>This is Favorites</p>
         <Header />
+        <h2>Favorites</h2>
       </div>
     );
   }
