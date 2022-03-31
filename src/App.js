@@ -57,7 +57,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          {loading && <Loading />}
+          {loading && <Loading loading={ loading } />}
           <Route
             exact
             path="/"
