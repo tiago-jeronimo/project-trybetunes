@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from '../pages/Loading';
+import styles from './Header.module.css';
 
 class Header extends React.Component {
   constructor(props) {
@@ -31,11 +32,33 @@ class Header extends React.Component {
       <header
         data-testid="header-component"
       >
-        <Link to="/search" data-testid="link-to-search">Search</Link>
-        <Link to="/favorites" data-testid="link-to-favorites"> Favorites</Link>
-        <Link to="/profile" data-testid="link-to-profile">Perfil</Link>
-        <h1>Eu sou um cabeçalho</h1>
-        <Loading loading={ loading } />
+        <div className={ styles.containerLink }>
+          <Link
+            className={ styles.flexItems }
+            to="/search"
+            data-testid="link-to-search"
+          >
+            Search
+
+          </Link>
+          <Link
+            className={ styles.flexItems }
+            to="/favorites"
+            data-testid="link-to-favorites"
+          >
+            Favorites
+          </Link>
+          <Link
+            className={ styles.flexItems }
+            to="/profile"
+            data-testid="link-to-profile"
+          >
+            Perfil
+          </Link>
+        </div>
+        <h1>Bem Vindo</h1>
+
+        <Loading loading={ loading } className={ styles.loading } />
         <h1 data-testid="header-user-name">
           {user}
         </h1>
