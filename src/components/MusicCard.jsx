@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './MusicCard.module.css';
 import Loading from '../pages/Loading';
-import { addSong, removeSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
   constructor(props) {
@@ -10,10 +10,16 @@ class MusicCard extends React.Component {
     this.state = {
       loading: false,
       check: false,
+      favoritesMusics: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.functionFavorites = this.functionFavorites.bind(this);
     this.functionRemoveFavorites = this.functionRemoveFavorites.bind(this);
+    this.getFavoriteSongs = this.FavoriteSongs.bind(this);
+  }
+
+  componentDidMount() {
+    this.FavoriteSongs();
   }
 
   handleChange({ target }) {
@@ -21,6 +27,24 @@ class MusicCard extends React.Component {
     const { checked } = target;
     return (checked) ? this.functionFavorites(infoAlbum)
       : this.functionRemoveFavorites(infoAlbum);
+  }
+
+  async FavoriteSongs() {
+    this.setState({
+      loading: true,
+    });
+    const favorites = await getFavoriteSongs();
+    this.setState({ loading: false, favoritesMusics: favorites });
+    const { favoritesMusics } = this.state;
+    const { infoAlbum } = this.props;
+    const results = favoritesMusics.find((element) => (
+      element.trackName.includes(infoAlbum.trackName)
+    ));
+    if (results) {
+      this.setState({
+        check: true,
+      });
+    }
   }
 
   async functionFavorites(param) {
