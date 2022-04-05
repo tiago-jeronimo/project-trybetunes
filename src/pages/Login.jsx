@@ -28,7 +28,6 @@ class Login extends React.Component {
             className={ styles.inputName }
           />
         </label>
-
         <button
           data-testid="login-submit-button"
           disabled={ btnInactive }

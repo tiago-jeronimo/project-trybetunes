@@ -64,7 +64,7 @@ describe('12 - Crie a lista de músicas favoritas', () => {
       const favoriteSongs = [
         {
           trackId: 12,
-          trackName: 'Track Name 1',
+          trackName: '  ',
           previewUrl: 'preview-url-1',
         },
         {

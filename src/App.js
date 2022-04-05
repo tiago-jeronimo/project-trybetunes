@@ -15,10 +15,10 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loginName: '',
       btnInactive: true,
       loading: false,
       goToAnotherPage: false,
+      loginName: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.validationInput = this.validationInput.bind(this);
@@ -46,14 +46,19 @@ class App extends React.Component {
   async fetchName() {
     this.setState({ loading: true });
     const { loginName } = this.state;
-    await createUser({ name: loginName });
+    await createUser({
+      name: loginName });
     this.setState({
       loading: false,
       goToAnotherPage: true });
   }
 
   render() {
-    const { loginName, btnInactive, loading, goToAnotherPage } = this.state;
+    const {
+      loginName,
+      btnInactive,
+      loading,
+      goToAnotherPage } = this.state;
     return (
       <BrowserRouter>
         <Switch>
