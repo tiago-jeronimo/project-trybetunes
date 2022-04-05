@@ -12,21 +12,19 @@ class Favorites extends React.Component {
       favoritesMusics: [],
     };
     this.FavoriteSongs = this.FavoriteSongs.bind(this);
+    // this.atualizaLista = this.atualizaLista.bind(this);
   }
 
   componentDidMount() {
     this.FavoriteSongs();
   }
 
-  async componentDidUpdate() {
-    const data = await getFavoriteSongs();
-    const func = () => {
-      this.setState({
-        favoritesMusics: data,
-      });
-    };
-    func();
-  }
+  // async atualizaLista() {
+  //   const favorites = await getFavoriteSongs()
+  //   this.setState({
+  //     favoritesMusics: favorites,
+  //   });
+  // }
 
   async FavoriteSongs() {
     this.setState({
@@ -49,6 +47,8 @@ class Favorites extends React.Component {
             <MusicCard
               key={ index }
               infoAlbum={ element }
+              removeFile="cardUnico"
+              funcRemove={ this.FavoriteSongs }
             />
           ))
           )}

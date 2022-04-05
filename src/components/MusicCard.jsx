@@ -16,6 +16,7 @@ class MusicCard extends React.Component {
     this.functionFavorites = this.functionFavorites.bind(this);
     this.functionRemoveFavorites = this.functionRemoveFavorites.bind(this);
     this.getFavoriteSongs = this.FavoriteSongs.bind(this);
+    // this.funcRemove = this.funcRemove.bind(this);
   }
 
   componentDidMount() {
@@ -62,12 +63,25 @@ class MusicCard extends React.Component {
     this.setState({
       loading: true,
     });
+    const { favoritesMusics } = this.state;
+    console.log(favoritesMusics);
     await removeSong(param);
+    // const results = favoritesMusics.filter((element, index) => (
+    //   element[index].check === true
+    // ));
     this.setState({
       loading: false,
       check: false,
     });
+    const { funcRemove } = this.props;
+    if (funcRemove) {
+      funcRemove();
+    }
   }
+
+  // async funcRemove() {
+  //   const favorites = await getFavoriteSongs();
+  // }
 
   render() {
     const { infoAlbum } = this.props;
@@ -91,10 +105,11 @@ class MusicCard extends React.Component {
                 <code>audio</code>
                 .
               </audio>
-              <label htmlFor="scales">
+              <label htmlFor="Favorita">
                 <input
                   type="checkbox"
-                  name="favorite"
+                  id="Favorita"
+                  name="Favorita"
                   data-testid={ `checkbox-music-${infoAlbum.trackId}` }
                   onChange={ this.handleChange }
                   checked={ check }
@@ -113,5 +128,6 @@ MusicCard.propTypes = {
     previewUrl: PropTypes.string,
     trackId: PropTypes.number,
   }).isRequired,
+  funcRemove: PropTypes.func.isRequired,
 };
 export default MusicCard;
